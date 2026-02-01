@@ -15,6 +15,17 @@ from app.db.init_db import init_db
 from app.db.session import SessionLocal
 
 
+def _parse_cors_origins(origins: str) -> list[str]:
+    """Parse allowed origins list from a comma-separated string."""
+
+    cleaned = [item.strip() for item in origins.split(",") if item.strip()]
+    if not cleaned:
+        return []
+    if "*" in cleaned:
+        return ["*"]
+    return cleaned
+
+
 def create_app() -> FastAPI:
     """Create and configure the FastAPI app."""
 
@@ -73,14 +84,3 @@ def _try_init_db() -> None:
 
     with SessionLocal() as session:
         init_db(session)
-
-
-def _parse_cors_origins(origins: str) -> list[str]:
-    """Parse allowed origins list from a comma-separated string."""
-
-    cleaned = [item.strip() for item in origins.split(",") if item.strip()]
-    if not cleaned:
-        return []
-    if "*" in cleaned:
-        return ["*"]
-    return cleaned
