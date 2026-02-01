@@ -370,6 +370,33 @@
   display: block;
 }
 
+.rightPanelHeader {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rightPanelLogo {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: #2170e6;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.rightPanelTitle {
+  font-size: 9px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
 .alertCard {
   border-radius: 5px;
   padding: 8px;
@@ -380,7 +407,7 @@
 .alertCriticalCard {
   position: absolute;
   left: 10px;
-  top: 40px;
+  top: 50px;
   width: 133px;
   height: 110px;
 }
@@ -388,7 +415,7 @@
 .alertAdviceCard {
   position: absolute;
   left: 10px;
-  top: 160px;
+  top: 170px;
   width: 133px;
   height: 100px;
 }
@@ -451,10 +478,18 @@
   border: 1px solid #f4f4f4;
   color: #9c9c9c;
   background: #ffffff;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   font-size: 9px;
   cursor: pointer;
+}
+
+.ghostButtonIcon {
+  width: 10px;
+  height: 10px;
+  display: block;
 }
 
 .divider {
