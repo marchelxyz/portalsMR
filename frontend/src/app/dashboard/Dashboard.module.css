@@ -67,6 +67,7 @@
   position: absolute;
   left: 12px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .sidebarItemActive {

@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import {
@@ -29,6 +30,7 @@ type DashboardState = {
 
 export default function DashboardPage() {
   const router = useRouter();
+  const pathname = usePathname();
   const [state, setState] = useState<DashboardState>({
     kpis: null,
     tickets: [],
@@ -87,9 +89,27 @@ export default function DashboardPage() {
             <div className={styles.sidebarLogo}>
               <img src="/figma/logo.png" alt="Portal 2.0" />
             </div>
-            <SidebarItem label="Главная" iconType="home" position="home" />
-            <SidebarItem label="Отчеты" iconType="report" position="reports" />
-            <SidebarItem label="База знаний" iconType="knowledge" position="knowledge" />
+            <SidebarItem
+              label="Главная"
+              iconType="home"
+              position="home"
+              href="/dashboard"
+              isActive={pathname === "/" || pathname === "/dashboard"}
+            />
+            <SidebarItem
+              label="Отчеты"
+              iconType="report"
+              position="reports"
+              href="/reports"
+              isActive={pathname === "/reports"}
+            />
+            <SidebarItem
+              label="База знаний"
+              iconType="knowledge"
+              position="knowledge"
+              href="/knowledge"
+              isActive={pathname === "/knowledge"}
+            />
           </aside>
           <TopKpiRow kpis={state.kpis} />
           <BalanceCard franchise={state.franchise} />
@@ -355,24 +375,27 @@ function SidebarItem({
   label,
   iconType,
   position,
+  href,
+  isActive,
 }: {
   label: string;
   iconType: "home" | "report" | "knowledge";
   position: "home" | "reports" | "knowledge";
+  href: string;
+  isActive: boolean;
 }) {
-  const active = position === "home";
   const positionClass =
     position === "home"
       ? styles.sidebarItemHome
       : position === "reports"
       ? styles.sidebarItemReports
       : styles.sidebarItemKnowledge;
-  const stateClass = active ? styles.sidebarItemActive : styles.sidebarItemInactive;
+  const stateClass = isActive ? styles.sidebarItemActive : styles.sidebarItemInactive;
   return (
-    <div className={`${styles.sidebarItem} ${positionClass} ${stateClass}`}>
-      <SidebarIcon iconType={iconType} isActive={active} />
+    <Link className={`${styles.sidebarItem} ${positionClass} ${stateClass}`} href={href}>
+      <SidebarIcon iconType={iconType} isActive={isActive} />
       <span>{label}</span>
-    </div>
+    </Link>
   );
 }
 
