@@ -13,6 +13,7 @@
      ```
      uvicorn app.main:app --host 0.0.0.0 --port $PORT
      ```
+   - Config-as-code: укажи файл `/backend/railway.json` (Settings → Config-as-code).
 
 ### Добавить Postgres
 1. Railway → Add → Database → PostgreSQL.
@@ -38,6 +39,7 @@
 2. Root Directory: `frontend`.
 3. Build Command: `npm run build` (по умолчанию).
 4. Output: `.next` (по умолчанию).
+5. В корне репозитория есть `vercel.json` для монорепозитория.
 
 ### Переменные окружения (Vercel → Settings → Environment Variables)
 Добавь:
