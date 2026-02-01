@@ -88,28 +88,25 @@ export default function DashboardPage() {
           timestamp={timestamp}
         />
       ) : null}
-      <aside className={styles.sidebar}>
-        <div className={styles.sidebarLogo}>AI</div>
-        <SidebarItem label="Главная" iconType="home" />
-        <SidebarItem label="Отчеты" iconType="report" />
-        <SidebarItem label="База" iconType="knowledge" />
-      </aside>
-      <section className={styles.content}>
-        <KpiRow kpis={state.kpis} />
-        <div className={styles.centerRow}>
-          <TicketsPanel tickets={state.tickets} />
-          <SideCards franchise={state.franchise} />
-        </div>
-        <div className={styles.bottomRow}>
-          <WeeklyChart weekly={state.weekly} />
-          <CostStructure />
-        </div>
-      </section>
+      <div className={styles.frame}>
+        <aside className={styles.sidebar}>
+          <div className={styles.sidebarLogo}>AI</div>
+          <SidebarItem label="Главная" iconType="home" position="home" />
+          <SidebarItem label="Отчеты" iconType="report" position="reports" />
+          <SidebarItem label="База знаний" iconType="knowledge" position="knowledge" />
+        </aside>
+        <TopKpiRow kpis={state.kpis} />
+        <BalanceCard franchise={state.franchise} />
+        <MarketingCard />
+        <WeeklyChart weekly={state.weekly} />
+        <CostStructure />
+        <AiAlerts tickets={state.tickets} />
+      </div>
     </main>
   );
 }
 
-function KpiRow({ kpis }: { kpis: KpiSummary | null }) {
+function TopKpiRow({ kpis }: { kpis: KpiSummary | null }) {
   const revenueValue = kpis ? formatCurrency(kpis.revenue_today) : "—";
   const forecastValue = kpis ? formatCurrency(kpis.profit_forecast) : "—";
   const laborPercent = kpis ? formatPercent(kpis.labor_cost_percent) : "—";
@@ -120,128 +117,90 @@ function KpiRow({ kpis }: { kpis: KpiSummary | null }) {
   const laborCritical = kpis ? kpis.labor_cost_percent > 28 : false;
 
   return (
-    <div className={styles.kpiRow}>
-      <KpiCard
+    <>
+      <TopKpiCard
         title="Выручка (Сегодня)"
         value={revenueValue}
         hint={planPercent}
         iconType="revenue"
         tone="success"
+        className={`${styles.card} ${styles.topCard} ${styles.topRevenue}`}
       />
-      <KpiCard
+      <TopKpiCard
         title="ФОТ"
         value={laborPercent}
         hint={laborCritical ? "Критично! Норма 28%" : "В норме"}
         iconType="labor"
         tone={laborCritical ? "critical" : "success"}
+        className={`${styles.card} ${styles.topCard} ${styles.topLabor}`}
       />
-      <KpiCard
+      <TopKpiCard
         title="Food Cost"
         value={foodPercent}
         hint={lflPercent}
         iconType="food"
         tone="default"
+        className={`${styles.card} ${styles.topCard} ${styles.topFood}`}
       />
-      <KpiCard
+      <TopKpiCard
         title="Чистая прибыль (прогноз)"
         value={forecastValue}
         hint="Прогноз месяца"
         iconType="profit"
         tone="default"
+        className={`${styles.card} ${styles.topCard} ${styles.topProfit}`}
       />
-    </div>
+    </>
   );
 }
 
-function KpiCard({
+function TopKpiCard({
   title,
   value,
   hint,
   iconType,
   tone,
+  className,
 }: {
   title: string;
   value: string;
   hint: string;
   iconType: "revenue" | "labor" | "food" | "profit";
   tone: "default" | "critical" | "success";
+  className: string;
 }) {
   const iconClass =
-    tone === "critical"
-      ? styles.kpiIconCritical
-      : tone === "success"
-      ? styles.kpiIconSuccess
-      : "";
+    tone === "critical" ? styles.iconCritical : styles.iconDefault;
+  const hintClass =
+    tone === "critical" ? styles.cardHintCritical : styles.cardHint;
   return (
-    <div className={styles.kpiCard}>
-      <div className={styles.kpiHeader}>
-        <div className={[styles.kpiIcon, iconClass].join(" ")}>
-          <KpiIcon iconType={iconType} />
-        </div>
-        <div className={styles.kpiTitle}>{title}</div>
+    <div className={className}>
+      <div className={`${styles.iconTile} ${iconClass}`}>
+        <KpiIcon iconType={iconType} />
       </div>
-      <div className={styles.kpiValue}>{value}</div>
-      <div className={tone === "critical" ? styles.kpiHintCritical : styles.kpiHint}>
-        {hint}
-      </div>
+      <div className={styles.cardTitle}>{title}</div>
+      <div className={styles.cardValue}>{value}</div>
+      <div className={hintClass}>{hint}</div>
     </div>
   );
 }
 
-function TicketsPanel({ tickets }: { tickets: AiTicket[] }) {
+function BalanceCard({ franchise }: { franchise: FranchiseSummary | null }) {
   return (
-    <div className={styles.tickets}>
-      <div className={styles.ticketsHeader}>AI Кубер — подсказки</div>
-      {tickets.length === 0 ? (
-        <div>Нет активных задач.</div>
-      ) : (
-        tickets.map((ticket) => (
-          <div
-            key={ticket.id}
-            className={[
-              styles.ticket,
-              ticket.severity === "critical" ? styles.ticketCritical : "",
-              ticket.severity === "advice" ? styles.ticketAdvice : "",
-            ].join(" ")}
-          >
-            <div className={styles.ticketTitle}>{ticket.title}</div>
-            <div className={styles.ticketBody}>{ticket.body}</div>
-            <span className={styles.ticketAction}>{ticket.action_label}</span>
-          </div>
-        ))
-      )}
-    </div>
-  );
-}
-
-function SideCards({ franchise }: { franchise: FranchiseSummary | null }) {
-  return (
-    <div className={styles.sideCards}>
-      <div className={styles.sideCard}>
-        <div className={styles.sideCardTitle}>Баланс с УК</div>
-        <div className={styles.financeRow}>
-          <span className={styles.financeLabel}>Роялти</span>
-          <span>{formatCurrency(franchise?.royalty_due)}</span>
+    <div className={`${styles.card} ${styles.balanceCard}`}>
+      <div className={styles.blockTitle}>Баланс с УК</div>
+      <div>
+        <div>К оплате:</div>
+        <div className={styles.cardValue}>
+          {formatCurrency(franchise?.supplies_due)}
         </div>
-        <div className={styles.financeRow}>
-          <span className={styles.financeLabel}>Маркетинг</span>
-          <span>{formatCurrency(franchise?.marketing_due)}</span>
-        </div>
-        <div className={styles.financeRow}>
-          <span className={styles.financeLabel}>Закупки</span>
-          <span>{formatCurrency(franchise?.supplies_due)}</span>
-        </div>
-        <button className={styles.buttonPrimary} type="button">
-          Оплатить
-        </button>
       </div>
-      <div className={styles.sideCard}>
-        <div className={styles.sideCardTitle}>QSC индекс</div>
-        <div className={styles.kpiValue}>
-          {franchise ? `${franchise.qsc_index.toFixed(1)}%` : "—"}
-        </div>
-        <div className={styles.kpiHint}>Рейтинг по стандартам сети</div>
-      </div>
+      <div className={styles.divider} />
+      <div>Роялти: {formatCurrency(franchise?.royalty_due)}</div>
+      <div>Маркетинг: {formatCurrency(franchise?.marketing_due)}</div>
+      <button className={styles.payButton} type="button">
+        Оплатить
+      </button>
     </div>
   );
 }
@@ -249,19 +208,14 @@ function SideCards({ franchise }: { franchise: FranchiseSummary | null }) {
 function WeeklyChart({ weekly }: { weekly: WeeklyChartPoint[] }) {
   const { linePath, dots } = buildLineChart(weekly);
   return (
-    <div className={styles.chartCard}>
-      <div className={styles.chartHeader}>Динамика недели</div>
+    <div className={`${styles.card} ${styles.centerChart}`}>
+      <div className={styles.blockTitle}>Динамика Выручки и Чеков (Неделя)</div>
       {weekly.length === 0 ? (
-        <div className={styles.chartList}>Данные не загружены.</div>
+        <div className={styles.cardHintGray}>Данные не загружены.</div>
       ) : (
         <>
-          <svg className={styles.chartCanvas} viewBox="0 0 320 120">
-            <path
-              d={linePath}
-              fill="none"
-              stroke="#2170e6"
-              strokeWidth="2"
-            />
+          <svg className={styles.chartCanvas} viewBox="0 0 300 90">
+            <path d={linePath} fill="none" stroke="#2170e6" strokeWidth="2" />
             {dots.map((dot, index) => (
               <circle key={index} cx={dot.x} cy={dot.y} r="3" fill="#2170e6" />
             ))}
@@ -278,9 +232,9 @@ function WeeklyChart({ weekly }: { weekly: WeeklyChartPoint[] }) {
 
 function CostStructure() {
   return (
-    <div className={styles.structureCard}>
-      <div className={styles.chartHeader}>Структура расходов</div>
-      <div className={styles.structureContent}>
+    <div className={`${styles.card} ${styles.centerDonut}`}>
+      <div className={styles.blockTitle}>Структура Расходов</div>
+      <div className={styles.donutRow}>
         <svg className={styles.donut} viewBox="0 0 120 120">
           <circle cx="60" cy="60" r="42" fill="none" stroke="#e6eef9" strokeWidth="12" />
           <circle
@@ -314,22 +268,22 @@ function CostStructure() {
             strokeDashoffset="-180"
           />
         </svg>
-        <div className={styles.structureLegend}>
+        <div>
           <div className={styles.legendRow}>
             <span className={styles.legendDot} style={{ background: "#2170e6" }} />
-            <span>ФОТ 31%</span>
+            <span>ФОТ (31%)</span>
           </div>
           <div className={styles.legendRow}>
             <span className={styles.legendDot} style={{ background: "#6ea4f5" }} />
-            <span>Продукты 28.5%</span>
+            <span>Продукты (28.5%)</span>
           </div>
           <div className={styles.legendRow}>
             <span className={styles.legendDot} style={{ background: "#9cc7ff" }} />
-            <span>Аренда 18%</span>
+            <span>Аренда</span>
           </div>
           <div className={styles.legendRow}>
             <span className={styles.legendDot} style={{ background: "#c8defc" }} />
-            <span>Прочее 22.5%</span>
+            <span>Прочее</span>
           </div>
         </div>
       </div>
@@ -427,12 +381,20 @@ function KpiIcon({ iconType }: { iconType: "revenue" | "labor" | "food" | "profi
 function SidebarItem({
   label,
   iconType,
+  position,
 }: {
   label: string;
   iconType: "home" | "report" | "knowledge";
+  position: "home" | "reports" | "knowledge";
 }) {
+  const positionClass =
+    position === "home"
+      ? styles.sidebarItemHome
+      : position === "reports"
+      ? styles.sidebarItemReports
+      : styles.sidebarItemKnowledge;
   return (
-    <div className={styles.sidebarItem}>
+    <div className={`${styles.sidebarItem} ${positionClass}`}>
       <SidebarIcon iconType={iconType} />
       <span>{label}</span>
     </div>
@@ -484,9 +446,9 @@ function buildLineChart(data: WeeklyChartPoint[]) {
     return { linePath: "", dots: [] as { x: number; y: number }[] };
   }
 
-  const width = 320;
-  const height = 120;
-  const padding = 16;
+  const width = 300;
+  const height = 90;
+  const padding = 10;
   const values = data.map((item) => item.revenue);
   const maxValue = Math.max(...values);
   const minValue = Math.min(...values);
@@ -509,4 +471,44 @@ function buildLineChart(data: WeeklyChartPoint[]) {
 
 function sumChecks(data: WeeklyChartPoint[]) {
   return data.reduce((total, item) => total + item.checks, 0);
+}
+
+function MarketingCard() {
+  return (
+    <div className={`${styles.card} ${styles.marketingCard}`}>
+      <div className={styles.blockTitle}>Маркетинг</div>
+      <div>Расход:</div>
+      <div className={styles.cardValue}>60,000 ₽</div>
+      <div className={styles.divider} />
+      <div>VK реклама: 25,000 ₽</div>
+      <div>Блогеры: 15,000 ₽</div>
+      <div>Карты: 20,000 ₽</div>
+      <button className={styles.marketingButton} type="button">
+        Посмотреть отчет
+      </button>
+    </div>
+  );
+}
+
+function AiAlerts({ tickets }: { tickets: AiTicket[] }) {
+  const critical = tickets.find((ticket) => ticket.severity === "critical");
+  const advice = tickets.find((ticket) => ticket.severity === "advice");
+
+  return (
+    <div className={`${styles.card} ${styles.rightPanel}`}>
+      <div className={`${styles.alertCard} ${styles.alertCritical}`}>
+        <div className={styles.alertTitle}>Внимание</div>
+        <div>{critical?.body ?? "ФОТ превышен. Проверьте смены."}</div>
+        <div className={styles.alertTitle}>Рекомендация</div>
+        <div>{critical?.action_label ?? "Пересмотреть график"}</div>
+      </div>
+      <div className={`${styles.alertCard} ${styles.alertAdvice}`}>
+        <div className={styles.alertTitle}>Совет</div>
+        <div>{advice?.body ?? "Продажи сезонных позиций снизились."}</div>
+        <div className={styles.alertTitle}>Рекомендация</div>
+        <div>{advice?.action_label ?? "Запустить промо"}</div>
+      </div>
+      <div className={styles.ghostButton}>Задать вопрос</div>
+    </div>
+  );
 }
