@@ -16,13 +16,15 @@ _pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verify a password against its hash."""
 
-    return _pwd_context.verify(plain_password, hashed_password)
+    normalized = _normalize_bcrypt_password(plain_password)
+    return _pwd_context.verify(normalized, hashed_password)
 
 
 def get_password_hash(password: str) -> str:
     """Hash a password for storage."""
 
-    return _pwd_context.hash(password)
+    normalized = _normalize_bcrypt_password(password)
+    return _pwd_context.hash(normalized)
 
 
 def create_access_token(subject: str, expires_delta: timedelta | None = None) -> str:
@@ -36,3 +38,12 @@ def create_access_token(subject: str, expires_delta: timedelta | None = None) ->
     )
     payload: dict[str, Any] = {"sub": subject, "exp": expire}
     return jwt.encode(payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm)
+
+
+def _normalize_bcrypt_password(password: str) -> bytes:
+    """Normalize password for bcrypt's 72-byte limit."""
+
+    encoded = password.encode("utf-8")
+    if len(encoded) <= 72:
+        return encoded
+    return encoded[:72]
