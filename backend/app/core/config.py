@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = Field(default=60)
     cors_allow_origins: str = Field(default="*")
 
-    seed_user_email: str = Field(default="demo@portal.local")
+    seed_user_email: str = Field(default="demo@portal.app")
     seed_user_password: str = Field(default="demo1234")
     seed_user_full_name: str = Field(default="Demo Partner")
     seed_partner_name: str = Field(default="Portal Franchise")

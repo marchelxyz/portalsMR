@@ -22,10 +22,10 @@ def init_db(session: Session) -> None:
     """Create tables and seed demo data when empty."""
 
     Base.metadata.create_all(bind=session.get_bind())
-    if _has_users(session):
-        return
-
     settings = get_settings()
+    if _has_users(session):
+        _ensure_seed_user_email(session, settings.seed_user_email)
+        return
     partner = Partner(name=settings.seed_partner_name)
     outlet = Outlet(
         name=settings.seed_outlet_name,
@@ -100,3 +100,18 @@ def _has_users(session: Session) -> bool:
     """Return True if at least one user exists."""
 
     return session.execute(select(User.id)).first() is not None
+
+
+def _ensure_seed_user_email(session: Session, seed_email: str) -> None:
+    """Update legacy seed email to a valid address."""
+
+    legacy_email = "demo@portal.local"
+    if seed_email == legacy_email:
+        return
+    user = session.execute(
+        select(User).where(User.email == legacy_email)
+    ).scalar_one_or_none()
+    if user is None:
+        return
+    user.email = seed_email
+    session.commit()
