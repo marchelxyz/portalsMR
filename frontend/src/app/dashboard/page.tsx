@@ -392,31 +392,11 @@ function SidebarIcon({ iconType }: { iconType: "home" | "report" | "knowledge" }
     return <img src="/figma/sidebar-home.svg" alt="" width={14} height={14} />;
   }
   if (iconType === "report") {
-    return (
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
-        <path
-          d="M5 4h9l5 5v11a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <path d="M9 13h6M9 17h6" stroke="currentColor" strokeWidth="2" />
-      </svg>
-    );
+    return <img src="/figma/sidebar-report.svg" alt="" width={14} height={14} />;
   }
   if (iconType === "knowledge") {
     return (
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
-        <path
-          d="M4 6h7a3 3 0 013 3v9H7a3 3 0 01-3-3V6z"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <path
-          d="M20 6h-7a3 3 0 00-3 3v9h7a3 3 0 003-3V6z"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-      </svg>
+      <img src="/figma/sidebar-knowledge.svg" alt="" width={14} height={14} />
     );
   }
   return (
