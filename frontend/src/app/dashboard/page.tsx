@@ -318,50 +318,15 @@ const FRAME_HEIGHT = 447;
 
 function KpiIcon({ iconType }: { iconType: "revenue" | "labor" | "food" | "profit" }) {
   if (iconType === "labor") {
-    return (
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
-        <path d="M8 12h8" stroke="currentColor" strokeWidth="2" />
-      </svg>
-    );
+    return <img src="/figma/kpi-labor.svg" alt="" width={14} height={14} />;
   }
   if (iconType === "food") {
-    return (
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
-        <path
-          d="M7 3v8M11 3v8M9 3v8M9 11v10"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <path
-          d="M16 3v7a3 3 0 003 3v8"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-      </svg>
-    );
+    return <img src="/figma/kpi-food.svg" alt="" width={14} height={14} />;
   }
   if (iconType === "profit") {
-    return (
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
-        <path
-          d="M12 3v18M16 7c0-2-2-3-4-3s-4 1-4 3 2 3 4 3 4 1 4 3-2 3-4 3-4-1-4-3"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-      </svg>
-    );
+    return <img src="/figma/kpi-profit.svg" alt="" width={14} height={14} />;
   }
-  return (
-    <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
-      <path
-        d="M4 14l4-4 4 3 6-6"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <circle cx="18" cy="7" r="2" fill="currentColor" />
-    </svg>
-  );
+  return <img src="/figma/kpi-revenue.svg" alt="" width={14} height={14} />;
 }
 
 function SidebarItem({
