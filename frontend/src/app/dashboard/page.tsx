@@ -17,6 +17,7 @@ import type {
   UserProfile,
   WeeklyChartPoint,
 } from "@/types/dashboard";
+import ScaledFrame from "@/components/ScaledFrame";
 import Sidebar from "@/components/Sidebar";
 
 import styles from "./Dashboard.module.css";
@@ -38,7 +39,6 @@ export default function DashboardPage() {
     user: null,
   });
   const [loading, setLoading] = useState(true);
-  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const token = window.localStorage.getItem("portal_token");
@@ -64,35 +64,21 @@ export default function DashboardPage() {
       .finally(() => setLoading(false));
   }, [router]);
 
-  useEffect(() => {
-    const updateScale = () => {
-      const scaleByWidth = window.innerWidth / FRAME_WIDTH;
-      const scaleByHeight = window.innerHeight / FRAME_HEIGHT;
-      const nextScale = Math.max(scaleByWidth, scaleByHeight);
-      setScale(nextScale);
-    };
-    updateScale();
-    window.addEventListener("resize", updateScale);
-    return () => window.removeEventListener("resize", updateScale);
-  }, []);
-
   if (loading) {
     return <main className={styles.page}>Загрузка...</main>;
   }
 
   return (
     <main className={styles.page}>
-      <div className={styles.scaleStage} style={{ transform: `scale(${scale})` }}>
-        <div className={styles.frame}>
-          <Sidebar />
-          <TopKpiRow kpis={state.kpis} />
-          <BalanceCard franchise={state.franchise} />
-          <MarketingCard />
-          <WeeklyChart weekly={state.weekly} />
-          <CostStructure />
-          <AiAlerts tickets={state.tickets} />
-        </div>
-      </div>
+      <ScaledFrame>
+        <Sidebar />
+        <TopKpiRow kpis={state.kpis} />
+        <BalanceCard franchise={state.franchise} />
+        <MarketingCard />
+        <WeeklyChart weekly={state.weekly} />
+        <CostStructure />
+        <AiAlerts tickets={state.tickets} />
+      </ScaledFrame>
     </main>
   );
 }
@@ -350,9 +336,6 @@ function formatWeekday(value: string) {
   }
   return date.toLocaleDateString("ru-RU", { weekday: "short" });
 }
-
-const FRAME_WIDTH = 741;
-const FRAME_HEIGHT = 447;
 
 function KpiIcon({ iconType }: { iconType: "revenue" | "labor" | "food" | "profit" }) {
   if (iconType === "labor") {
