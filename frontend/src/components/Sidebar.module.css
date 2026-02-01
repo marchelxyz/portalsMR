@@ -47,11 +47,13 @@
 .sidebarItemActive {
   background: #e6f0f9;
   color: #236dd0;
+  --stroke-0: #236dd0;
 }
 
 .sidebarItemInactive {
   background: transparent;
   color: #d6d6d6;
+  --stroke-0: #d6d6d6;
 }
 
 .sidebarIconActive {
