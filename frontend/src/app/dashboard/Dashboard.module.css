@@ -535,6 +535,17 @@
   height: 90px;
 }
 
+.chartXAxis {
+  display: grid;
+  margin-top: 6px;
+  font-size: 8px;
+  color: #9c9c9c;
+}
+
+.chartXAxisLabel {
+  text-align: center;
+}
+
 .chartLegend {
   display: flex;
   gap: 10px;
