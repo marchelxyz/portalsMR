@@ -185,16 +185,18 @@ function TopKpiCard({
 function BalanceCard({ franchise }: { franchise: FranchiseSummary | null }) {
   return (
     <div className={`${styles.card} ${styles.balanceCard}`}>
-      <div className={styles.blockTitle}>Баланс с УК</div>
-      <div>
-        <div>К оплате:</div>
-        <div className={styles.cardValue}>
-          {formatCurrency(franchise?.supplies_due)}
-        </div>
+      <div className={styles.balanceTitle}>Баланс с УК</div>
+      <div className={styles.balanceLabel}>К оплате:</div>
+      <div className={`${styles.cardValue} ${styles.balanceValue}`}>
+        {formatCurrency(franchise?.supplies_due)}
       </div>
-      <div className={styles.divider} />
-      <div>Роялти: {formatCurrency(franchise?.royalty_due)}</div>
-      <div>Маркетинг: {formatCurrency(franchise?.marketing_due)}</div>
+      <div className={styles.balanceDivider} />
+      <div className={styles.balanceRoyalty}>
+        Роялти: {formatCurrency(franchise?.royalty_due)}
+      </div>
+      <div className={styles.balanceMarketing}>
+        Маркетинг: {formatCurrency(franchise?.marketing_due)}
+      </div>
       <button className={styles.payButton} type="button">
         Оплатить
       </button>
@@ -410,13 +412,13 @@ function sumChecks(data: WeeklyChartPoint[]) {
 function MarketingCard() {
   return (
     <div className={`${styles.card} ${styles.marketingCard}`}>
-      <div className={styles.blockTitle}>Маркетинг</div>
-      <div>Расход:</div>
-      <div className={styles.cardValue}>60,000 ₽</div>
-      <div className={styles.divider} />
-      <div>VK реклама: 25,000 ₽</div>
-      <div>Блогеры: 15,000 ₽</div>
-      <div>Карты: 20,000 ₽</div>
+      <div className={styles.marketingTitle}>Маркетинг</div>
+      <div className={styles.marketingLabel}>Расход:</div>
+      <div className={`${styles.cardValue} ${styles.marketingValue}`}>60,000 ₽</div>
+      <div className={styles.marketingDivider} />
+      <div className={styles.marketingVk}>VK реклама: 25,000 ₽</div>
+      <div className={styles.marketingBloggers}>Блогеры: 15,000 ₽</div>
+      <div className={styles.marketingCards}>Карты: 20,000 ₽</div>
       <button className={styles.marketingButton} type="button">
         Посмотреть отчет
       </button>
@@ -430,13 +432,17 @@ function AiAlerts({ tickets }: { tickets: AiTicket[] }) {
 
   return (
     <div className={`${styles.card} ${styles.rightPanel}`}>
-      <div className={`${styles.alertCard} ${styles.alertCritical}`}>
+      <div
+        className={`${styles.alertCard} ${styles.alertCritical} ${styles.alertCriticalCard}`}
+      >
         <div className={styles.alertTitle}>Внимание</div>
         <div>{critical?.body ?? "ФОТ превышен. Проверьте смены."}</div>
         <div className={styles.alertTitle}>Рекомендация</div>
         <div>{critical?.action_label ?? "Пересмотреть график"}</div>
       </div>
-      <div className={`${styles.alertCard} ${styles.alertAdvice}`}>
+      <div
+        className={`${styles.alertCard} ${styles.alertAdvice} ${styles.alertAdviceCard}`}
+      >
         <div className={styles.alertTitle}>Совет</div>
         <div>{advice?.body ?? "Продажи сезонных позиций снизились."}</div>
         <div className={styles.alertTitle}>Рекомендация</div>
