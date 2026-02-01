@@ -58,11 +58,13 @@
 
 .sidebarIconActive {
   filter: none;
+  color: inherit;
 }
 
 .sidebarIconInactive {
   filter: none;
   opacity: 0.45;
+  color: inherit;
 }
 
 .sidebarItemHome {
