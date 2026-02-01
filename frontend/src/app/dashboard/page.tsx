@@ -65,10 +65,9 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const updateScale = () => {
-      const nextScale = Math.min(
-        window.innerWidth / FRAME_WIDTH,
-        window.innerHeight / FRAME_HEIGHT,
-      );
+      const scaleByWidth = window.innerWidth / FRAME_WIDTH;
+      const scaleByHeight = window.innerHeight / FRAME_HEIGHT;
+      const nextScale = Math.max(scaleByWidth, scaleByHeight);
       setScale(nextScale);
     };
     updateScale();
