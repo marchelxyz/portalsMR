@@ -19,8 +19,6 @@ import type {
 } from "@/types/dashboard";
 
 import styles from "./Dashboard.module.css";
-import WatermarkOverlay from "@/components/WatermarkOverlay";
-
 type DashboardState = {
   kpis: KpiSummary | null;
   tickets: AiTicket[];
@@ -39,7 +37,7 @@ export default function DashboardPage() {
     user: null,
   });
   const [loading, setLoading] = useState(true);
-  const [timestamp, setTimestamp] = useState(getTimestamp());
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const token = window.localStorage.getItem("portal_token");
@@ -66,10 +64,16 @@ export default function DashboardPage() {
   }, [router]);
 
   useEffect(() => {
-    const interval = window.setInterval(() => {
-      setTimestamp(getTimestamp());
-    }, 60000);
-    return () => window.clearInterval(interval);
+    const updateScale = () => {
+      const nextScale = Math.min(
+        window.innerWidth / FRAME_WIDTH,
+        window.innerHeight / FRAME_HEIGHT,
+      );
+      setScale(nextScale);
+    };
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
   }, []);
 
   if (loading) {
@@ -78,29 +82,21 @@ export default function DashboardPage() {
 
   return (
     <main className={styles.page}>
-      {shouldShowWatermark() && state.user ? (
-        <WatermarkOverlay
-          partnerName={state.user.partner?.name ?? state.user.full_name}
-          outletId={
-            state.user.outlet?.external_id ??
-            `OUT-${state.user.outlet?.id ?? state.user.id}`
-          }
-          timestamp={timestamp}
-        />
-      ) : null}
-      <div className={styles.frame}>
-        <aside className={styles.sidebar}>
-          <div className={styles.sidebarLogo}>AI</div>
-          <SidebarItem label="Главная" iconType="home" position="home" />
-          <SidebarItem label="Отчеты" iconType="report" position="reports" />
-          <SidebarItem label="База знаний" iconType="knowledge" position="knowledge" />
-        </aside>
-        <TopKpiRow kpis={state.kpis} />
-        <BalanceCard franchise={state.franchise} />
-        <MarketingCard />
-        <WeeklyChart weekly={state.weekly} />
-        <CostStructure />
-        <AiAlerts tickets={state.tickets} />
+      <div className={styles.scaleStage} style={{ transform: `scale(${scale})` }}>
+        <div className={styles.frame}>
+          <aside className={styles.sidebar}>
+            <div className={styles.sidebarLogo}>AI</div>
+            <SidebarItem label="Главная" iconType="home" position="home" />
+            <SidebarItem label="Отчеты" iconType="report" position="reports" />
+            <SidebarItem label="База знаний" iconType="knowledge" position="knowledge" />
+          </aside>
+          <TopKpiRow kpis={state.kpis} />
+          <BalanceCard franchise={state.franchise} />
+          <MarketingCard />
+          <WeeklyChart weekly={state.weekly} />
+          <CostStructure />
+          <AiAlerts tickets={state.tickets} />
+        </div>
       </div>
     </main>
   );
@@ -316,19 +312,8 @@ function formatDay(value: string) {
   });
 }
 
-function getTimestamp() {
-  return new Date().toLocaleString("ru-RU", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
-
-function shouldShowWatermark() {
-  return process.env.NEXT_PUBLIC_WATERMARK_ENABLED !== "false";
-}
+const FRAME_WIDTH = 741;
+const FRAME_HEIGHT = 447;
 
 function KpiIcon({ iconType }: { iconType: "revenue" | "labor" | "food" | "profit" }) {
   if (iconType === "labor") {
