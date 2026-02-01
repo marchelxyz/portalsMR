@@ -190,7 +190,7 @@ function TopKpiCard({
         {iconType === "labor" ? (
           <img
             className={styles.kpiLaborAlert}
-            src="/figma/kpi-food.svg"
+            src="/figma/kpi-warning.svg"
             alt=""
             width={14}
             height={14}
