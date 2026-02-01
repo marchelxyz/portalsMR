@@ -255,11 +255,114 @@
   height: 158px;
 }
 
+.balanceTitle {
+  position: absolute;
+  left: 10px;
+  top: 11px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.balanceLabel {
+  position: absolute;
+  left: 10px;
+  top: 38px;
+  font-size: 10px;
+}
+
+.balanceValue {
+  position: absolute;
+  left: 113px;
+  top: 37px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.balanceDivider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 67px;
+  height: 1px;
+  background: #e5e5e5;
+}
+
+.balanceRoyalty {
+  position: absolute;
+  left: 10px;
+  top: 82px;
+  font-size: 10px;
+}
+
+.balanceMarketing {
+  position: absolute;
+  left: 10px;
+  top: 103px;
+  font-size: 10px;
+}
+
 .marketingCard {
   left: 75px;
   top: 277px;
   width: 153px;
   height: 158px;
+}
+
+.marketingTitle {
+  position: absolute;
+  left: 10px;
+  top: 11px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.marketingLabel {
+  position: absolute;
+  left: 10px;
+  top: 38px;
+  font-size: 10px;
+}
+
+.marketingValue {
+  position: absolute;
+  left: 116px;
+  top: 37px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.marketingDivider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 57px;
+  height: 1px;
+  background: #e5e5e5;
+}
+
+.marketingVk {
+  position: absolute;
+  left: 10px;
+  top: 61px;
+  font-size: 10px;
+}
+
+.marketingBloggers {
+  position: absolute;
+  left: 10px;
+  top: 82px;
+  font-size: 10px;
+}
+
+.marketingCards {
+  position: absolute;
+  left: 10px;
+  top: 103px;
+  font-size: 10px;
 }
 
 .centerChart {
@@ -281,8 +384,8 @@
   top: 107px;
   width: 153px;
   height: 328px;
-  display: grid;
-  gap: 10px;
+  padding: 0;
+  display: block;
 }
 
 .alertCard {
@@ -290,6 +393,22 @@
   padding: 8px;
   font-size: 8px;
   line-height: 1.25;
+}
+
+.alertCriticalCard {
+  position: absolute;
+  left: 10px;
+  top: 40px;
+  width: 133px;
+  height: 110px;
+}
+
+.alertAdviceCard {
+  position: absolute;
+  left: 10px;
+  top: 160px;
+  width: 133px;
+  height: 100px;
 }
 
 .alertCritical {
@@ -308,8 +427,8 @@
 
 .payButton {
   position: absolute;
-  left: 85px;
-  top: 232px;
+  left: 10px;
+  top: 125px;
   width: 133px;
   height: 23px;
   border-radius: 5px;
@@ -325,8 +444,8 @@
 
 .marketingButton {
   position: absolute;
-  left: 85px;
-  top: 402px;
+  left: 10px;
+  top: 125px;
   width: 133px;
   height: 23px;
   border-radius: 5px;
@@ -342,8 +461,8 @@
 
 .ghostButton {
   position: absolute;
-  left: 586px;
-  top: 403px;
+  left: 10px;
+  top: 296px;
   width: 133px;
   height: 22px;
   border-radius: 5px;
