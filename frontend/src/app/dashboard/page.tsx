@@ -85,7 +85,9 @@ export default function DashboardPage() {
       <div className={styles.scaleStage} style={{ transform: `scale(${scale})` }}>
         <div className={styles.frame}>
           <aside className={styles.sidebar}>
-            <div className={styles.sidebarLogo}>AI</div>
+            <div className={styles.sidebarLogo}>
+              <img src="/figma/logo.png" alt="Portal 2.0" />
+            </div>
             <SidebarItem label="Главная" iconType="home" position="home" />
             <SidebarItem label="Отчеты" iconType="report" position="reports" />
             <SidebarItem label="База знаний" iconType="knowledge" position="knowledge" />
