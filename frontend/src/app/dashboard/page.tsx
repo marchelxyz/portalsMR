@@ -245,7 +245,7 @@ function BalanceCard({ franchise }: { franchise: FranchiseSummary | null }) {
 }
 
 function WeeklyChart({ weekly }: { weekly: WeeklyChartPoint[] }) {
-  const { linePath, dots } = buildLineChart(weekly);
+  const { revenuePath, revenueDots, checksPath, checksDots } = buildLineChart(weekly);
   return (
     <div className={`${styles.card} ${styles.centerChart}`}>
       <div className={styles.blockTitle}>Динамика Выручки и Чеков (Неделя)</div>
@@ -254,11 +254,25 @@ function WeeklyChart({ weekly }: { weekly: WeeklyChartPoint[] }) {
       ) : (
         <>
           <svg className={styles.chartCanvas} viewBox="0 0 300 90">
-            <path d={linePath} fill="none" stroke="#2170e6" strokeWidth="2" />
-            {dots.map((dot, index) => (
+            <path d={revenuePath} fill="none" stroke="#2170e6" strokeWidth="2" />
+            <path d={checksPath} fill="none" stroke="#6ea4f5" strokeWidth="2" />
+            {revenueDots.map((dot, index) => (
               <circle key={index} cx={dot.x} cy={dot.y} r="3" fill="#2170e6" />
             ))}
+            {checksDots.map((dot, index) => (
+              <circle key={`checks-${index}`} cx={dot.x} cy={dot.y} r="2.5" fill="#6ea4f5" />
+            ))}
           </svg>
+          <div
+            className={styles.chartXAxis}
+            style={{ gridTemplateColumns: `repeat(${weekly.length}, 1fr)` }}
+          >
+            {weekly.map((point) => (
+              <span key={point.day} className={styles.chartXAxisLabel}>
+                {formatWeekday(point.day)}
+              </span>
+            ))}
+          </div>
           <div className={styles.chartLegend}>
             <span>Выручка</span>
             <span>Чеки: {sumChecks(weekly)}</span>
@@ -353,6 +367,14 @@ function formatDay(value: string) {
     day: "2-digit",
     month: "short",
   });
+}
+
+function formatWeekday(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+  return date.toLocaleDateString("ru-RU", { weekday: "short" });
 }
 
 const FRAME_WIDTH = 741;
@@ -453,30 +475,50 @@ function SidebarIcon({
 
 function buildLineChart(data: WeeklyChartPoint[]) {
   if (data.length === 0) {
-    return { linePath: "", dots: [] as { x: number; y: number }[] };
+    return {
+      revenuePath: "",
+      revenueDots: [] as { x: number; y: number }[],
+      checksPath: "",
+      checksDots: [] as { x: number; y: number }[],
+    };
   }
 
   const width = 300;
   const height = 90;
   const padding = 10;
-  const values = data.map((item) => item.revenue);
-  const maxValue = Math.max(...values);
-  const minValue = Math.min(...values);
+  const revenueValues = data.map((item) => item.revenue);
+  const checksValues = data.map((item) => item.checks);
+  const allValues = [...revenueValues, ...checksValues];
+  const maxValue = Math.max(...allValues);
+  const minValue = Math.min(...allValues);
   const range = maxValue - minValue || 1;
 
   const step =
     data.length > 1 ? (width - padding * 2) / (data.length - 1) : 0;
-  const points = data.map((item, index) => {
+  const revenuePoints = data.map((item, index) => {
     const x = data.length > 1 ? padding + index * step : width / 2;
     const y = height - padding - ((item.revenue - minValue) / range) * (height - padding * 2);
     return { x, y };
   });
+  const checksPoints = data.map((item, index) => {
+    const x = data.length > 1 ? padding + index * step : width / 2;
+    const y = height - padding - ((item.checks - minValue) / range) * (height - padding * 2);
+    return { x, y };
+  });
 
-  const linePath = points
+  const revenuePath = revenuePoints
+    .map((point, index) => `${index === 0 ? "M" : "L"}${point.x} ${point.y}`)
+    .join(" ");
+  const checksPath = checksPoints
     .map((point, index) => `${index === 0 ? "M" : "L"}${point.x} ${point.y}`)
     .join(" ");
 
-  return { linePath, dots: points };
+  return {
+    revenuePath,
+    revenueDots: revenuePoints,
+    checksPath,
+    checksDots: checksPoints,
+  };
 }
 
 function sumChecks(data: WeeklyChartPoint[]) {
