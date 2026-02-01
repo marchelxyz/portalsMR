@@ -388,6 +388,9 @@ function SidebarItem({
 }
 
 function SidebarIcon({ iconType }: { iconType: "home" | "report" | "knowledge" }) {
+  if (iconType === "home") {
+    return <img src="/figma/sidebar-home.svg" alt="" width={14} height={14} />;
+  }
   if (iconType === "report") {
     return (
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
