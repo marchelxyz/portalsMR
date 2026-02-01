@@ -1,0 +1,295 @@
+.page {
+  min-height: 100vh;
+  background: #eff3f6;
+  display: flex;
+  position: relative;
+}
+
+.sidebar {
+  width: 72px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 10px;
+  gap: 18px;
+  border-right: 1px solid #f1f1f1;
+}
+
+.sidebarLogo {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: #2170e6;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.sidebarItem {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e6eef9;
+  display: grid;
+  place-items: center;
+  color: #236dd0;
+  font-size: 9px;
+  text-align: center;
+  line-height: 1.1;
+  gap: 2px;
+  padding: 6px 4px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px;
+}
+
+.kpiRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.kpiCard {
+  background: #ffffff;
+  border: 1px solid #f4f4f4;
+  border-radius: 10px;
+  padding: 14px 16px;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kpiHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kpiIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #addeff;
+  display: grid;
+  place-items: center;
+  color: #2170e6;
+  font-size: 12px;
+}
+
+.kpiIconCritical {
+  background: #f5bbba;
+  color: #d31c21;
+}
+
+.kpiIconSuccess {
+  background: #d6f3e5;
+  color: #28b775;
+}
+
+.kpiTitle {
+  font-size: 11px;
+  color: #111111;
+}
+
+.kpiValue {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.kpiHint {
+  font-size: 10px;
+  color: #28b775;
+}
+
+.kpiHintCritical {
+  color: #d31c21;
+}
+
+.centerRow {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.tickets {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #f4f4f4;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 260px;
+}
+
+.ticketsHeader {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ticket {
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #eaeaea;
+  background: #f9fafb;
+}
+
+.ticketCritical {
+  border-color: #d31c21;
+  background: #fae0df;
+}
+
+.ticketAdvice {
+  border-color: #e9e1bd;
+  background: #f9f1cd;
+}
+
+.ticketTitle {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.ticketBody {
+  font-size: 11px;
+  color: #111111;
+  line-height: 1.4;
+}
+
+.ticketAction {
+  margin-top: 8px;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #2170e6;
+}
+
+.sideCards {
+  display: grid;
+  gap: 12px;
+}
+
+.sideCard {
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #f4f4f4;
+  padding: 14px;
+}
+
+.sideCardTitle {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.financeRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+
+.financeLabel {
+  color: #6b7280;
+}
+
+.buttonPrimary {
+  margin-top: 10px;
+  background: #2170e6;
+  border: none;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bottomRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.chartCard,
+.structureCard {
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #f4f4f4;
+  padding: 14px;
+  min-height: 160px;
+}
+
+.chartHeader {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.chartList {
+  display: grid;
+  gap: 6px;
+  font-size: 10px;
+  color: #111111;
+}
+
+.chartCanvas {
+  width: 100%;
+  height: 120px;
+}
+
+.chartLegend {
+  display: flex;
+  gap: 12px;
+  font-size: 10px;
+  margin-top: 6px;
+  color: #6b7280;
+}
+
+.structureItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+
+.structureContent {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.donut {
+  width: 120px;
+  height: 120px;
+}
+
+.structureLegend {
+  display: grid;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.legendRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
