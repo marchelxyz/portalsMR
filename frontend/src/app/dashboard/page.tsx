@@ -426,8 +426,10 @@ function AiAlerts({ tickets }: { tickets: AiTicket[] }) {
   return (
     <div className={`${styles.card} ${styles.rightPanel}`}>
       <div className={styles.rightPanelHeader}>
-        <div className={styles.rightPanelLogo}>AI</div>
-        <div className={styles.rightPanelTitle}>AI-ассистент</div>
+        <div className={styles.rightPanelLogo}>
+          <AiLogoIcon className={styles.rightPanelLogoIcon} />
+        </div>
+        <div className={styles.rightPanelTitle}>AI помощник</div>
       </div>
       <div
         className={`${styles.alertCard} ${styles.alertCritical} ${styles.alertCriticalCard}`}
@@ -450,6 +452,17 @@ function AiAlerts({ tickets }: { tickets: AiTicket[] }) {
         <SendIcon className={styles.ghostButtonIcon} />
       </div>
     </div>
+  );
+}
+
+function AiLogoIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <path
+        d="M12 3C9 5.8 7 8.2 7 12.1C7 15 9.2 17 12 17C14.8 17 17 15 17 12.1C17 9.3 15.7 7.4 14 6C14 8.3 12.8 9.9 11.2 11.2C10.2 12 9.6 12.7 9.6 13.6C9.6 14.8 10.6 15.6 12 15.6C13.4 15.6 14.4 14.8 14.4 13.4C14.4 11.3 13.4 9.4 12 8.2C12.1 6.9 12.4 5 12 3Z"
+        fill="currentColor"
+      />
+    </svg>
   );
 }
 

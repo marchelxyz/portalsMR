@@ -373,51 +373,55 @@
 .rightPanelHeader {
   position: absolute;
   left: 10px;
-  top: 12px;
+  top: 8px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .rightPanelLogo {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   border-radius: 4px;
   background: #2170e6;
   color: #ffffff;
   display: grid;
   place-items: center;
-  font-size: 8px;
-  font-weight: 700;
+}
+
+.rightPanelLogoIcon {
+  width: 10px;
+  height: 10px;
+  display: block;
 }
 
 .rightPanelTitle {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 600;
   color: #1a1a1a;
 }
 
 .alertCard {
   border-radius: 5px;
-  padding: 8px;
-  font-size: 8px;
-  line-height: 1.25;
+  padding: 6px;
+  font-size: 7px;
+  line-height: 1.2;
 }
 
 .alertCriticalCard {
   position: absolute;
   left: 10px;
-  top: 50px;
+  top: 32px;
   width: 133px;
-  height: 110px;
+  height: 104px;
 }
 
 .alertAdviceCard {
   position: absolute;
   left: 10px;
-  top: 170px;
+  top: 145px;
   width: 133px;
-  height: 100px;
+  height: 96px;
 }
 
 .alertCritical {
@@ -473,23 +477,25 @@
   left: 10px;
   top: 296px;
   width: 133px;
-  height: 22px;
+  height: 20px;
   border-radius: 5px;
   border: 1px solid #f4f4f4;
   color: #9c9c9c;
   background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 9px;
+  display: grid;
+  place-items: center;
+  font-size: 8px;
   cursor: pointer;
+  position: absolute;
 }
 
 .ghostButtonIcon {
-  width: 10px;
-  height: 10px;
-  display: block;
+  width: 11px;
+  height: 11px;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .divider {
