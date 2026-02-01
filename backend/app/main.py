@@ -6,6 +6,7 @@ import logging
 import time
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.api.router import api_router
@@ -19,6 +20,13 @@ def create_app() -> FastAPI:
 
     settings = get_settings()
     app = FastAPI(title=settings.app_name)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=_parse_cors_origins(settings.cors_allow_origins),
+        allow_credentials=False,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     app.include_router(api_router)
 
     @app.get("/health")
@@ -65,3 +73,14 @@ def _try_init_db() -> None:
 
     with SessionLocal() as session:
         init_db(session)
+
+
+def _parse_cors_origins(origins: str) -> list[str]:
+    """Parse allowed origins list from a comma-separated string."""
+
+    cleaned = [item.strip() for item in origins.split(",") if item.strip()]
+    if not cleaned:
+        return []
+    if "*" in cleaned:
+        return ["*"]
+    return cleaned

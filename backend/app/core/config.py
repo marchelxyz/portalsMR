@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     jwt_secret_key: str = Field(default="change-me")
     jwt_algorithm: str = Field(default="HS256")
     access_token_expire_minutes: int = Field(default=60)
+    cors_allow_origins: str = Field(default="*")
 
     seed_user_email: str = Field(default="demo@portal.local")
     seed_user_password: str = Field(default="demo1234")
