@@ -176,7 +176,27 @@ function TopKpiCard({
         <KpiIcon iconType={iconType} />
       </div>
       <div className={styles.cardTitle}>{title}</div>
-      <div className={styles.cardValue}>{value}</div>
+      <div className={styles.cardValue}>
+        <span>{value}</span>
+        {iconType === "revenue" ? (
+          <img
+            className={styles.kpiArrow}
+            src="/figma/kpi-up.svg"
+            alt=""
+            width={12}
+            height={12}
+          />
+        ) : null}
+        {iconType === "labor" ? (
+          <img
+            className={styles.kpiLaborAlert}
+            src="/figma/kpi-food.svg"
+            alt=""
+            width={14}
+            height={14}
+          />
+        ) : null}
+      </div>
       <div className={hintClass}>{hint}</div>
     </div>
   );
@@ -340,30 +360,61 @@ function SidebarItem({
   iconType: "home" | "report" | "knowledge";
   position: "home" | "reports" | "knowledge";
 }) {
+  const active = position === "home";
   const positionClass =
     position === "home"
       ? styles.sidebarItemHome
       : position === "reports"
       ? styles.sidebarItemReports
       : styles.sidebarItemKnowledge;
+  const stateClass = active ? styles.sidebarItemActive : styles.sidebarItemInactive;
   return (
-    <div className={`${styles.sidebarItem} ${positionClass}`}>
-      <SidebarIcon iconType={iconType} />
+    <div className={`${styles.sidebarItem} ${positionClass} ${stateClass}`}>
+      <SidebarIcon iconType={iconType} isActive={active} />
       <span>{label}</span>
     </div>
   );
 }
 
-function SidebarIcon({ iconType }: { iconType: "home" | "report" | "knowledge" }) {
+function SidebarIcon({
+  iconType,
+  isActive,
+}: {
+  iconType: "home" | "report" | "knowledge";
+  isActive: boolean;
+}) {
+  const iconClass = isActive ? styles.sidebarIconActive : styles.sidebarIconInactive;
   if (iconType === "home") {
-    return <img src="/figma/sidebar-home.svg" alt="" width={14} height={14} />;
+    return (
+      <img
+        src="/figma/sidebar-home.svg"
+        alt=""
+        width={16}
+        height={16}
+        className={iconClass}
+      />
+    );
   }
   if (iconType === "report") {
-    return <img src="/figma/sidebar-report.svg" alt="" width={14} height={14} />;
+    return (
+      <img
+        src="/figma/sidebar-report.svg"
+        alt=""
+        width={16}
+        height={16}
+        className={iconClass}
+      />
+    );
   }
   if (iconType === "knowledge") {
     return (
-      <img src="/figma/sidebar-knowledge.svg" alt="" width={14} height={14} />
+      <img
+        src="/figma/sidebar-knowledge.svg"
+        alt=""
+        width={16}
+        height={16}
+        className={iconClass}
+      />
     );
   }
   return (
