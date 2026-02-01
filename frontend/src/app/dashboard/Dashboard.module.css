@@ -94,10 +94,32 @@
   width: 153px;
   height: 83px;
   top: 12px;
+  padding: 0;
+  position: absolute;
 }
 
 .topRevenue {
   left: 75px;
+}
+
+.topRevenue .cardTitle {
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.topRevenue .cardValue {
+  top: 41px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.topRevenue .cardHint {
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }
 
 .topLabor {
@@ -106,12 +128,66 @@
   border-color: #d31c21;
 }
 
+.topLabor .cardTitle {
+  top: 14px;
+  left: 35px;
+}
+
+.topLabor .cardValue {
+  top: 41px;
+  left: 12px;
+}
+
+.topLabor .cardHint {
+  top: 65px;
+  left: 12px;
+}
+
 .topFood {
   left: 409px;
 }
 
+.topFood .cardTitle {
+  top: 14px;
+  left: 35px;
+}
+
+.topFood .cardValue {
+  top: 41px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.topFood .cardHint {
+  top: 65px;
+  left: 12px;
+}
+
 .topProfit {
   left: 576px;
+}
+
+.topProfit .cardTitle {
+  top: 10px;
+  left: 35px;
+  line-height: 1.2;
+}
+
+.topProfit .cardValue {
+  top: 41px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.topProfit .cardHint {
+  top: 65px;
+  left: 12px;
+}
+
+.topCard .cardTitle,
+.topCard .cardValue,
+.topCard .cardHint {
+  position: absolute;
 }
 
 .iconTile {
@@ -122,6 +198,13 @@
   place-items: center;
   font-size: 10px;
   margin-bottom: 4px;
+}
+
+.topCard .iconTile {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  margin: 0;
 }
 
 .iconDefault {
@@ -136,18 +219,19 @@
 
 .cardTitle {
   font-size: 10px;
-  margin-bottom: 4px;
+  margin: 0;
 }
 
 .cardValue {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 2px;
+  margin: 0;
 }
 
 .cardHint {
   font-size: 10px;
   color: #28b775;
+  margin: 0;
 }
 
 .cardHintCritical {
