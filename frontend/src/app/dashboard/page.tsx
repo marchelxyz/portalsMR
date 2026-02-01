@@ -425,6 +425,10 @@ function AiAlerts({ tickets }: { tickets: AiTicket[] }) {
 
   return (
     <div className={`${styles.card} ${styles.rightPanel}`}>
+      <div className={styles.rightPanelHeader}>
+        <div className={styles.rightPanelLogo}>AI</div>
+        <div className={styles.rightPanelTitle}>AI-ассистент</div>
+      </div>
       <div
         className={`${styles.alertCard} ${styles.alertCritical} ${styles.alertCriticalCard}`}
       >
@@ -441,7 +445,24 @@ function AiAlerts({ tickets }: { tickets: AiTicket[] }) {
         <div className={styles.alertTitle}>Рекомендация</div>
         <div>{advice?.action_label ?? "Запустить промо"}</div>
       </div>
-      <div className={styles.ghostButton}>Задать вопрос</div>
+      <div className={styles.ghostButton}>
+        <span>Задать вопрос</span>
+        <SendIcon className={styles.ghostButtonIcon} />
+      </div>
     </div>
+  );
+}
+
+function SendIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <path
+        d="M4 12L20 4L16.5 20L11.5 13.5L4 12Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M20 4L11.5 13.5" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
   );
 }
