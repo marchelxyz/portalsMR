@@ -52,8 +52,8 @@
 
 .sidebarItemInactive {
   background: transparent;
-  color: #d6d6d6;
-  --stroke-0: #d6d6d6;
+  color: #afaeae;
+  --stroke-0: #afaeae;
 }
 
 .sidebarIconActive {
@@ -63,7 +63,7 @@
 
 .sidebarIconInactive {
   filter: none;
-  opacity: 0.45;
+  opacity: 1;
   color: inherit;
 }
 
