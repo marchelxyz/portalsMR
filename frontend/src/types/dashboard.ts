@@ -9,8 +9,8 @@ export type KpiSummary = {
 
 export type AiTicket = {
   id: number;
-  severity: \"critical\" | \"warning\" | \"advice\";
-  status: \"open\" | \"done\";
+  severity: "critical" | "warning" | "advice";
+  status: "open" | "done";
   title: string;
   body: string;
   action_label: string;
