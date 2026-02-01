@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import {
@@ -18,6 +17,7 @@ import type {
   UserProfile,
   WeeklyChartPoint,
 } from "@/types/dashboard";
+import Sidebar from "@/components/Sidebar";
 
 import styles from "./Dashboard.module.css";
 type DashboardState = {
@@ -30,7 +30,6 @@ type DashboardState = {
 
 export default function DashboardPage() {
   const router = useRouter();
-  const pathname = usePathname();
   const [state, setState] = useState<DashboardState>({
     kpis: null,
     tickets: [],
@@ -85,32 +84,7 @@ export default function DashboardPage() {
     <main className={styles.page}>
       <div className={styles.scaleStage} style={{ transform: `scale(${scale})` }}>
         <div className={styles.frame}>
-          <aside className={styles.sidebar}>
-            <div className={styles.sidebarLogo}>
-              <img src="/figma/logo.png" alt="Portal 2.0" />
-            </div>
-            <SidebarItem
-              label="Главная"
-              iconType="home"
-              position="home"
-              href="/dashboard"
-              isActive={pathname === "/" || pathname === "/dashboard"}
-            />
-            <SidebarItem
-              label="Отчеты"
-              iconType="report"
-              position="reports"
-              href="/reports"
-              isActive={pathname === "/reports"}
-            />
-            <SidebarItem
-              label="База знаний"
-              iconType="knowledge"
-              position="knowledge"
-              href="/knowledge"
-              isActive={pathname === "/knowledge"}
-            />
-          </aside>
+          <Sidebar />
           <TopKpiRow kpis={state.kpis} />
           <BalanceCard franchise={state.franchise} />
           <MarketingCard />
@@ -391,86 +365,6 @@ function KpiIcon({ iconType }: { iconType: "revenue" | "labor" | "food" | "profi
     return <img src="/figma/kpi-profit.svg" alt="" width={14} height={14} />;
   }
   return <img src="/figma/kpi-revenue.svg" alt="" width={14} height={14} />;
-}
-
-function SidebarItem({
-  label,
-  iconType,
-  position,
-  href,
-  isActive,
-}: {
-  label: string;
-  iconType: "home" | "report" | "knowledge";
-  position: "home" | "reports" | "knowledge";
-  href: string;
-  isActive: boolean;
-}) {
-  const positionClass =
-    position === "home"
-      ? styles.sidebarItemHome
-      : position === "reports"
-      ? styles.sidebarItemReports
-      : styles.sidebarItemKnowledge;
-  const stateClass = isActive ? styles.sidebarItemActive : styles.sidebarItemInactive;
-  return (
-    <Link className={`${styles.sidebarItem} ${positionClass} ${stateClass}`} href={href}>
-      <SidebarIcon iconType={iconType} isActive={isActive} />
-      <span>{label}</span>
-    </Link>
-  );
-}
-
-function SidebarIcon({
-  iconType,
-  isActive,
-}: {
-  iconType: "home" | "report" | "knowledge";
-  isActive: boolean;
-}) {
-  const iconClass = isActive ? styles.sidebarIconActive : styles.sidebarIconInactive;
-  if (iconType === "home") {
-    return (
-      <img
-        src="/figma/sidebar-home.svg"
-        alt=""
-        width={18}
-        height={18}
-        className={iconClass}
-      />
-    );
-  }
-  if (iconType === "report") {
-    return (
-      <img
-        src="/figma/sidebar-report.svg"
-        alt=""
-        width={18}
-        height={18}
-        className={iconClass}
-      />
-    );
-  }
-  if (iconType === "knowledge") {
-    return (
-      <img
-        src="/figma/sidebar-knowledge.svg"
-        alt=""
-        width={18}
-        height={18}
-        className={iconClass}
-      />
-    );
-  }
-  return (
-    <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
-      <path
-        d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1v-9z"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-    </svg>
-  );
 }
 
 function buildLineChart(data: WeeklyChartPoint[]) {

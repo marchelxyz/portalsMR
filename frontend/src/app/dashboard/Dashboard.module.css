@@ -24,81 +24,14 @@
   font-size: 10px;
 }
 
-.sidebar {
+.contentArea {
   position: absolute;
-  left: 0;
+  left: 75px;
   top: 0;
-  width: 59px;
-  height: 447px;
-  background: #ffffff;
-}
-
-.sidebarLogo {
-  width: 35px;
-  height: 35px;
-  border-radius: 7px;
-  background: #2170e6;
-  display: grid;
-  place-items: center;
-  position: absolute;
-  left: 12px;
-  top: 22px;
-  overflow: hidden;
-}
-
-.sidebarLogo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.65);
-}
-
-.sidebarItem {
-  width: 35px;
-  height: 35px;
-  border-radius: 7px;
-  display: grid;
-  place-items: center;
-  color: #236dd0;
-  font-size: 5px;
-  text-align: center;
-  line-height: 1.2;
-  gap: 2px;
-  position: absolute;
-  left: 12px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.sidebarItemActive {
-  background: #e6f0f9;
-  color: #236dd0;
-}
-
-.sidebarItemInactive {
-  background: transparent;
-  color: #d6d6d6;
-}
-
-.sidebarIconActive {
-  filter: none;
-}
-
-.sidebarIconInactive {
-  filter: none;
-  opacity: 0.45;
-}
-
-.sidebarItemHome {
-  top: 82px;
-}
-
-.sidebarItemReports {
-  top: 122px;
-}
-
-.sidebarItemKnowledge {
-  top: 162px;
+  right: 0;
+  bottom: 0;
+  padding: 24px;
+  box-sizing: border-box;
 }
 
 .card {
