@@ -134,7 +134,7 @@ function TopKpiRow({ kpis }: { kpis: KpiSummary | null }) {
       <TopKpiCard
         title="Food Cost"
         value={foodPercent}
-        hint={lflPercent}
+        hint="В норме"
         iconType="food"
         tone="default"
         className={`${styles.card} ${styles.topCard} ${styles.topFood}`}
@@ -142,7 +142,7 @@ function TopKpiRow({ kpis }: { kpis: KpiSummary | null }) {
       <TopKpiCard
         title="Чистая прибыль (прогноз)"
         value={forecastValue}
-        hint="Прогноз месяца"
+        hint=""
         iconType="profit"
         tone="default"
         className={`${styles.card} ${styles.topCard} ${styles.topProfit}`}
@@ -197,7 +197,7 @@ function TopKpiCard({
           />
         ) : null}
       </div>
-      <div className={hintClass}>{hint}</div>
+      {hint ? <div className={hintClass}>{hint}</div> : null}
     </div>
   );
 }
@@ -389,8 +389,8 @@ function SidebarIcon({
       <img
         src="/figma/sidebar-home.svg"
         alt=""
-        width={16}
-        height={16}
+        width={18}
+        height={18}
         className={iconClass}
       />
     );
@@ -400,8 +400,8 @@ function SidebarIcon({
       <img
         src="/figma/sidebar-report.svg"
         alt=""
-        width={16}
-        height={16}
+        width={18}
+        height={18}
         className={iconClass}
       />
     );
@@ -411,8 +411,8 @@ function SidebarIcon({
       <img
         src="/figma/sidebar-knowledge.svg"
         alt=""
-        width={16}
-        height={16}
+        width={18}
+        height={18}
         className={iconClass}
       />
     );
