@@ -12,7 +12,8 @@
 .scaleStage {
   width: 741px;
   height: 447px;
-  transform-origin: top left;
+  transform-origin: center;
+  will-change: transform;
 }
 
 .frame {
