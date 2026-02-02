@@ -184,6 +184,14 @@
   left: 10px;
   top: 10px;
   margin: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.topCard .iconTile img {
+  width: 12px;
+  height: 12px;
+  opacity: 0.85;
 }
 
 .iconDefault {
