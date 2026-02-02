@@ -38,7 +38,7 @@ export default function ScaledFrame({ children }: ScaledFrameProps) {
 function getNextScale(viewportWidth: number, viewportHeight: number) {
   const scaleByWidth = viewportWidth / FRAME_WIDTH;
   const scaleByHeight = viewportHeight / FRAME_HEIGHT;
-  return Math.max(scaleByWidth, scaleByHeight);
+  return Math.min(scaleByWidth, scaleByHeight);
 }
 
 const FRAME_WIDTH = 741;
