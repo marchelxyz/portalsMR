@@ -1,0 +1,336 @@
+.page {
+  min-height: 100vh;
+  background: #eaf6f2;
+  color: #2f4b4b;
+}
+
+.appFrame {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #dfeae6;
+}
+
+.topLeft,
+.topCenter,
+.topRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titleButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d7f71;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.iconButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e1e7e5;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: #6d7b78;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.iconSmall {
+  width: 14px;
+  height: 14px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #cfe74d;
+  color: #4a5b2d;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.bodyGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr) 84px;
+  gap: 16px;
+  padding: 18px 20px 30px;
+}
+
+.leftRail,
+.rightRail {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 12px 24px rgba(79, 125, 118, 0.08);
+}
+
+.railButton {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #7b8a87;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.railButtonActive {
+  color: #1d7f71;
+}
+
+.railIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.content {
+  background: #e8f7f2;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: inset 0 0 0 1px rgba(118, 164, 157, 0.2);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.brand {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.brandBadge {
+  background: #d81f2a;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 16px rgba(216, 31, 42, 0.2);
+}
+
+.brandCaption {
+  font-size: 11px;
+  color: #4f6b67;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.metricCard {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 12px 20px rgba(77, 120, 113, 0.08);
+}
+
+.metricLabel {
+  font-size: 16px;
+  font-weight: 600;
+  color: #3a5653;
+  margin-bottom: 10px;
+}
+
+.metricValueRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.metricValue {
+  font-size: 40px;
+  font-weight: 700;
+  color: #2c4b4b;
+}
+
+.metricDelta {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.metricDeltaup {
+  color: #1bb671;
+}
+
+.metricDeltadown {
+  color: #e5525f;
+}
+
+.metricDeltaneutral {
+  color: #6e7b79;
+}
+
+.chartCard {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px 22px 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 14px 24px rgba(77, 120, 113, 0.08);
+}
+
+.chartTitle {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.chartWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chartSvg {
+  width: 100%;
+  height: 240px;
+}
+
+.chartGridLine {
+  stroke: #b7d0ca;
+  stroke-dasharray: 6 6;
+}
+
+.chartLinePrimary {
+  fill: none;
+  stroke: #4d77ff;
+  stroke-width: 4;
+}
+
+.chartLineSecondary {
+  fill: none;
+  stroke: #f25d6a;
+  stroke-width: 4;
+}
+
+.chartXAxis {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 6px;
+  font-size: 12px;
+  color: #7b8a87;
+  text-align: center;
+}
+
+.chartXAxisLabel {
+  display: block;
+}
+
+.filterRow {
+  display: flex;
+  gap: 12px;
+}
+
+.filterButton {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid #cfe2dc;
+  background: #ffffff;
+  color: #4f6b67;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filterButtonActive {
+  background: #1d7f71;
+  border-color: #1d7f71;
+  color: #ffffff;
+}
+
+@media (max-width: 1200px) {
+  .bodyGrid {
+    grid-template-columns: 72px minmax(0, 1fr) 72px;
+    padding: 16px;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .metricValue {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 900px) {
+  .bodyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .leftRail,
+  .rightRail {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .filterRow {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .topBar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .titleButton {
+    font-size: 16px;
+  }
+
+  .metricValue {
+    font-size: 28px;
+  }
+
+  .chartSvg {
+    height: 200px;
+  }
+}
